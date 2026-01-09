@@ -1,0 +1,279 @@
+{
+    "info": {
+        "_postman_id": "seo-generator-api-collection",
+        "name": "SEO Generator API",
+        "description": "Collection để test SEO Generator API qua Postman",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Health Check",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{base_url}}/health",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "health"
+                    ]
+                },
+                "description": "Kiểm tra xem API server có hoạt động không"
+            },
+            "response": []
+        },
+        {
+            "name": "Generate SEO",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"product_id\": 1,\n    \"title\": \"Áo Thun Nam Cotton Mùa Hè\",\n    \"description\": \"Áo thun nam chất lượng cao với vải cotton 100% tự nhiên. Thoát mồ hôi nhanh, mát mẻ, thích hợp mặc hàng ngày hoặc đi chơi.\",\n    \"brand\": \"FashionBrand\",\n    \"features\": \"Cotton 100%, Thoát mồ hôi nhanh, Chất lượng cao\",\n    \"tags\": [\"cotton\", \"mùa hè\", \"áo thun\"],\n    \"price\": 199000,\n    \"images\": [\"image1.jpg\", \"image2.jpg\"],\n    \"primary_keyword\": \"áo thun nam cotton\"\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{base_url}}/seo/v1/generate",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "seo",
+                        "v1",
+                        "generate"
+                    ]
+                },
+                "description": "Generate SEO content cho 1 sản phẩm (Non-streaming, trả về JSON)"
+            },
+            "response": []
+        },
+        {
+            "name": "Generate SEO (Streaming)",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"product_id\": 1,\n    \"title\": \"Áo Thun Nam Cotton Mùa Hè\",\n    \"description\": \"Áo thun nam chất lượng cao với vải cotton 100% tự nhiên. Thoát mồ hôi nhanh, mát mẻ, thích hợp mặc hàng ngày hoặc đi chơi.\",\n    \"brand\": \"FashionBrand\",\n    \"features\": \"Cotton 100%, Thoát mồ hôi nhanh, Chất lượng cao\",\n    \"tags\": [\"cotton\", \"mùa hè\", \"áo thun\"],\n    \"price\": 199000,\n    \"images\": [\"image1.jpg\", \"image2.jpg\"],\n    \"primary_keyword\": \"áo thun nam cotton\"\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{base_url}}/seo/v1/generate-stream",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "seo",
+                        "v1",
+                        "generate-stream"
+                    ]
+                },
+                "description": "Generate SEO content với STREAMING response (Server-Sent Events). Response sẽ xuất hiện từng phần một trong Postman. Kiểm tra Headers → Content-Type sẽ là 'text/event-stream'"
+            },
+            "response": []
+        },
+        {
+            "name": "Generate SEO Batch",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "[\n    {\n        \"product_id\": 1,\n        \"title\": \"Áo Thun Nam Cotton\",\n        \"description\": \"Áo thun nam chất lượng cao với vải cotton 100% tự nhiên.\",\n        \"brand\": \"FashionBrand\",\n        \"features\": \"Cotton 100%\",\n        \"tags\": [\"cotton\"],\n        \"price\": 199000\n    },\n    {\n        \"product_id\": 2,\n        \"title\": \"Quần Short Nam\",\n        \"description\": \"Quần short nam chất lượng cao, vải jean bền đẹp.\",\n        \"brand\": \"FashionBrand\",\n        \"features\": \"Vải jean\",\n        \"tags\": [\"quần\", \"short\"],\n        \"price\": 299000\n    }\n]",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{base_url}}/seo/v1/generate-batch",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "seo",
+                        "v1",
+                        "generate-batch"
+                    ]
+                },
+                "description": "Generate SEO content cho nhiều sản phẩm cùng lúc"
+            },
+            "response": []
+        },
+        {
+            "name": "Classify Product",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                    "raw": "{{base_url}}/seo/v1/classify-product?title=Áo Thun Nam Cotton Mùa Hè&description=Áo thun nam chất lượng cao với vải cotton 100% tự nhiên",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "seo",
+                        "v1",
+                        "classify-product"
+                    ],
+                    "query": [
+                        {
+                            "key": "title",
+                            "value": "Áo Thun Nam Cotton Mùa Hè"
+                        },
+                        {
+                            "key": "description",
+                            "value": "Áo thun nam chất lượng cao với vải cotton 100% tự nhiên"
+                        }
+                    ]
+                },
+                "description": "Phân loại sản phẩm (seasonal/evergreen/hybrid)"
+            },
+            "response": []
+        },
+        {
+            "name": "Get Trending Keywords",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{base_url}}/seo/v1/trending-keywords?keyword=áo thun nam",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "seo",
+                        "v1",
+                        "trending-keywords"
+                    ],
+                    "query": [
+                        {
+                            "key": "keyword",
+                            "value": "áo thun nam"
+                        }
+                    ]
+                },
+                "description": "Tìm trending keywords cho một keyword"
+            },
+            "response": []
+        },
+        {
+            "name": "Adjust SEO",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"product_id\": 1,\n    \"original_seo_content\": \"[META TITLE]\\nÁo Thun Nam Cotton Mùa Hè - Thoát Mồ Hôi Nhanh\\n\\n[META DESCRIPTION]\\nÁo thun nam cotton 100%, thoát mồ hôi nhanh, mát mẻ, phù hợp mặc hàng ngày hoặc đi chơi.\\n\\n[PRODUCT DESCRIPTION]\\nÁo thun nam cotton mùa hè được thiết kế dành cho những khách hàng yêu thích sự thoải mái và thoáng mát...\",\n    \"adjustment_requests\": [\n        \"Rút ngắn meta title dưới 60 ký tự\",\n        \"Thêm CTA mạnh hơn\",\n        \"Thêm thông tin bảo hành\"\n    ],\n    \"user_notes\": \"Khách hàng muốn thấy rõ hơn các lợi ích\",\n    \"product_context\": {\n        \"title\": \"Áo Thun Nam Cotton\",\n        \"brand\": \"FashionBrand\",\n        \"price\": 199000\n    }\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{base_url}}/seo/v1/adjust-seo",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "seo",
+                        "v1",
+                        "adjust-seo"
+                    ]
+                },
+                "description": "Chỉnh sửa SEO content đã tạo (Non-streaming, trả về JSON)"
+            },
+            "response": []
+        },
+        {
+            "name": "Adjust SEO (Streaming)",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"product_id\": 1,\n    \"original_seo_content\": \"[META TITLE]\\nÁo Thun Nam Cotton Mùa Hè - Thoát Mồ Hôi Nhanh\\n\\n[META DESCRIPTION]\\nÁo thun nam cotton 100%, thoát mồ hôi nhanh, mát mẻ, phù hợp mặc hàng ngày hoặc đi chơi.\\n\\n[PRODUCT DESCRIPTION]\\nÁo thun nam cotton mùa hè được thiết kế dành cho những khách hàng yêu thích sự thoải mái và thoáng mát...\",\n    \"adjustment_requests\": [\n        \"Rút ngắn meta title dưới 60 ký tự\",\n        \"Thêm CTA mạnh hơn\",\n        \"Thêm thông tin bảo hành\"\n    ],\n    \"user_notes\": \"Khách hàng muốn thấy rõ hơn các lợi ích\",\n    \"product_context\": {\n        \"title\": \"Áo Thun Nam Cotton\",\n        \"brand\": \"FashionBrand\",\n        \"price\": 199000\n    }\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{base_url}}/seo/v1/adjust-seo-stream",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "seo",
+                        "v1",
+                        "adjust-seo-stream"
+                    ]
+                },
+                "description": "Chỉnh sửa SEO content với STREAMING response (Server-Sent Events). Response sẽ xuất hiện từng phần một trong Postman. Kiểm tra Headers → Content-Type sẽ là 'text/event-stream'"
+            },
+            "response": []
+        },
+        {
+            "name": "Root Endpoint",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{base_url}}/",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        ""
+                    ]
+                },
+                "description": "Thông tin về API và các endpoints"
+            },
+            "response": []
+        }
+    ],
+    "variable": [
+        {
+            "key": "base_url",
+            "value": "http://localhost:8000",
+            "type": "string"
+        }
+    ]
+}
